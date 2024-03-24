@@ -85,7 +85,7 @@ function initTray(win: BrowserWindow) {
             click: createAboutWindow
         },
         {
-            label: "Update Vencord",
+            label: "Check for Updates",
             async click() {
                 await downloadVencordFiles();
                 app.relaunch();
@@ -93,7 +93,7 @@ function initTray(win: BrowserWindow) {
             }
         },
         {
-            label: "Reset Vesktop",
+            label: "Reset Softcord",
             async click() {
                 await clearData(win);
             }
@@ -109,7 +109,7 @@ function initTray(win: BrowserWindow) {
             }
         },
         {
-            label: "Quit Vesktop",
+            label: "Quit Softcord",
             click() {
                 isQuitting = true;
                 app.quit();
@@ -118,15 +118,15 @@ function initTray(win: BrowserWindow) {
     ]);
 
     tray = new Tray(ICON_PATH);
-    tray.setToolTip("Vesktop");
+    tray.setToolTip("Softcord");
     tray.setContextMenu(trayMenu);
     tray.on("click", () => win.show());
 }
 
 async function clearData(win: BrowserWindow) {
     const { response } = await dialog.showMessageBox(win, {
-        message: "Are you sure you want to reset Vesktop?",
-        detail: "This will log you out, clear caches and reset all your settings!\n\nVesktop will automatically restart after this operation.",
+        message: "Are you sure you want to reset Softcord?",
+        detail: "This will log you out, clear caches and reset all your settings!\n\nSoftcord will automatically restart after this operation.",
         buttons: ["Yes", "No"],
         cancelId: MessageBoxChoice.Cancel,
         defaultId: MessageBoxChoice.Default,
@@ -155,24 +155,24 @@ function initMenuBar(win: BrowserWindow) {
 
     const subMenu = [
         {
-            label: "About Vesktop",
+            label: "About Softcord",
             click: createAboutWindow
         },
         {
-            label: "Force Update Vencord",
+            label: "Force Update Softcord",
             async click() {
                 await downloadVencordFiles();
                 app.relaunch();
                 app.quit();
             },
-            toolTip: "Vesktop will automatically restart after this operation"
+            toolTip: "Softcord will automatically restart after this operation"
         },
         {
-            label: "Reset Vesktop",
+            label: "Reset Softcord",
             async click() {
                 await clearData(win);
             },
-            toolTip: "Vesktop will automatically restart after this operation"
+            toolTip: "Softcord will automatically restart after this operation"
         },
         {
             label: "Relaunch",
@@ -241,7 +241,7 @@ function initMenuBar(win: BrowserWindow) {
 
     const menu = Menu.buildFromTemplate([
         {
-            label: "Vesktop",
+            label: "Softcord",
             role: "appMenu",
             submenu: subMenu.filter(isTruthy)
         },
@@ -398,7 +398,7 @@ function createMainWindow() {
             transparencyOption !== "none" && {
                 transparent: true
             }),
-        ...(staticTitle && { title: "Vesktop" }),
+        ...(staticTitle && { title: "Softcord" }),
         ...(process.platform === "darwin" && getDarwinOptions()),
         ...getWindowBoundsOptions(),
         autoHideMenuBar: enableMenu
